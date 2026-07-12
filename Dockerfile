@@ -26,34 +26,34 @@ RUN useradd -m -s /bin/zsh dev && \
     echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Pre-install LazyPi packages
-# Sequential installs ensure build failure if any package fails and avoid potential hangs with background processes
+# Use xargs to install packages in parallel (up to 4 at a time) for speed while ensuring build failure if any fail
 RUN npm install -g @robzolkos/lazypi && \
-    npm install -g pi-subagents && \
-    npm install -g pi-mcp-adapter && \
-    npm install -g pi-web-access && \
-    npm install -g pi-memory-md && \
-    npm install -g pi-simplify && \
-    npm install -g pi-add-dir && \
-    npm install -g pi-prompt-template-model && \
-    npm install -g pi-claude-cli && \
-    npm install -g @plannotator/pi-extension && \
-    npm install -g pi-slopchop && \
-    npm install -g pi-usage-extension && \
-    npm install -g @tmustier/pi-raw-paste && \
-    npm install -g pi-manage-todo-list && \
-    npm install -g pi-btw && \
-    npm install -g pi-autoresearch && \
-    npm install -g pi-ralph-wiggum && \
-    npm install -g pi-ask-user && \
-    npm install -g pi-interactive-shell && \
-    npm install -g @devkade/pi-plan && \
-    npm install -g @juanibiapina/pi-powerbar && \
-    npm install -g @juanibiapina/pi-extension-settings && \
-    npm install -g @tmustier/pi-usage-extension && \
-    npm install -g @every-env/compound-plugin && \
-    npm install -g pi-hackerman && \
-    npm install -g @victor-software-house/pi-curated-themes && \
-    npm install -g pi-terminal-theme
+    echo "pi-subagents \
+pi-mcp-adapter \
+pi-web-access \
+pi-memory-md \
+pi-simplify \
+pi-add-dir \
+pi-prompt-template-model \
+pi-claude-cli \
+@plannotator/pi-extension \
+pi-slopchop \
+pi-usage-extension \
+@tmustier/pi-raw-paste \
+pi-manage-todo-list \
+pi-btw \
+pi-autoresearch \
+pi-ralph-wiggum \
+pi-ask-user \
+pi-interactive-shell \
+@devkade/pi-plan \
+@juanibiapina/pi-powerbar \
+@juanibiapina/pi-extension-settings \
+@tmustier/pi-usage-extension \
+@every-env/compound-plugin \
+pi-hackerman \
+@victor-software-house/pi-curated-themes \
+pi-terminal-theme" | xargs -n 1 -P 4 npm install -g
 
 # Pre-populate the LazyPi state file so the installer recognizes the global npm packages as already installed
 RUN mkdir -p /root/.pi/agent && echo '{"packages": ["npm:pi-subagents", "npm:pi-ask-user", "npm:pi-mcp-adapter", "npm:pi-web-access", "git:github.com/VandeeFeng/pi-memory-md", "npm:@devkade/pi-plan", "npm:pi-simplify", "npm:pi-add-dir", "npm:pi-prompt-template-model", "npm:pi-claude-cli", "npm:@plannotator/pi-extension", "npm:pi-slopchop", "npm:@juanibiapina/pi-extension-settings", "npm:@juanibiapina/pi-powerbar", "npm:@tmustier/pi-usage-extension", "npm:@tmustier/pi-raw-paste", "git:github.com/tintinweb/pi-manage-todo-list@b75c449aa85ce328e9a8b632f62bf642aed40359", "npm:pi-btw", "npm:pi-interactive-shell", "git:github.com/davebcn87/pi-autoresearch", "npm:@tmustier/pi-ralph-wiggum", "npm:@every-env/compound-plugin", "git:github.com/javierportillo/pi-hackerman@63b0a3ef2c7b14985ffeb6cac44614ba59cd5693", "npm:@victor-software-house/pi-curated-themes", "npm:pi-terminal-theme"]}' > /root/.pi/agent/settings.json
