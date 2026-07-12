@@ -20,7 +20,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 
 # Create a non-root user 'dev'
 RUN useradd -m -s /bin/zsh dev && \
-    echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+    touch /home/dev/.zshrc && \
+    chown dev:dev /home/dev/.zshrc
 
 # Pre-install LazyPi packages
 # We use 'yes' to automate the "Install all" selection in the interactive picker
