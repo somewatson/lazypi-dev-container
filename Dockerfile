@@ -52,7 +52,10 @@ RUN npm install -g pi-autoresearch & \
     npm install -g pi-ralph-wiggum & \
     wait
 
-# Run lazypi to catch any new default packages or configurations
+# Pre-populate the LazyPi state file so the installer recognizes the global npm packages as already installed
+RUN mkdir -p /root/.pi/agent && echo '{"packages": ["npm:pi-subagents", "npm:pi-mcp-adapter", "npm:pi-web-access", "npm:pi-memory-md", "npm:pi-plan", "npm:pi-simplify", "npm:pi-add-dir", "npm:pi-prompt-template-model", "npm:pi-claude-cli", "npm:@plannotator/pi-extension", "npm:pi-slopchop", "npm:pi-powerbar", "npm:pi-extension-settings", "npm:pi-usage-extension", "npm:@tmustier/pi-raw-paste", "npm:pi-manage-todo-list", "npm:pi-btw", "npm:pi-autoresearch", "npm:pi-ralph-wiggum"]}' > /root/.pi/agent/settings.json
+
+# Run lazypi to catch any new default packages or configurations (now a no-op for the above)
 RUN yes | lazypi || true
 
 USER dev
