@@ -1,6 +1,6 @@
 # LazyPi Development Container
 
-An Ubuntu-based ARM64 compatible environment with ZSH, Oh My Zsh, Node.js, and LazyPi.
+A Debian-based ARM64 compatible environment with ZSH, Oh My Zsh, Node.js, and LazyPi.
 
 ## Quick Start
 
@@ -23,7 +23,7 @@ An Ubuntu-based ARM64 compatible environment with ZSH, Oh My Zsh, Node.js, and L
 
 
 ## Features
-- **Ubuntu Base**: Familiar and easy to use.
+- **Debian Slim Base**: Lightweight and fast.
 - **ARM64 Compatible**: Works on Apple Silicon and ARM64 servers.
 - **ZSH + Oh My Zsh**: Pre-configured shell.
 - **LazyPi**: Pre-installed with all packages.
@@ -40,6 +40,7 @@ You can add custom providers and models via `/home/dev/.pi/agent/models.json` (m
 Since we use a bind mount for persistence, you should create the configuration directory and file on your **host machine** before starting the container. This ensures the settings are preserved and easy to edit.
 
 1. **Create the config directory**:
+   The container now handles permissions automatically on startup, but you can initialize it manually:
    ```bash
    mkdir -p ./lazypi_config/agent
    ```

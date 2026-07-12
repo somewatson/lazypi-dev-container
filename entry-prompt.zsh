@@ -1,3 +1,7 @@
+# Ensure permissions are correct for the mounted config volume
+# This fixes "Permission denied" on the host for ./lazypi_config
+bash /home/dev/setup-permissions.sh
+
 # Prompt the user to update LazyPi on shell start
 echo "\n--- LazyPi Dev Container ---"
 echo "Would you like to check for LazyPi package updates? (y/N)"

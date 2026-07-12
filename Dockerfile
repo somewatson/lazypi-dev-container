@@ -83,7 +83,8 @@ WORKDIR /home/dev/workspace
 
 # Copy update prompt and add to zshrc
 COPY --chown=dev:dev entry-prompt.zsh /home/dev/entry-prompt.zsh
-RUN chmod +x /home/dev/entry-prompt.zsh && echo 'source /home/dev/entry-prompt.zsh' >> /home/dev/.zshrc
+COPY --chown=dev:dev setup-permissions.sh /home/dev/setup-permissions.sh
+RUN chmod +x /home/dev/entry-prompt.zsh /home/dev/setup-permissions.sh && echo 'source /home/dev/entry-prompt.zsh' >> /home/dev/.zshrc
 
 # Default command
 CMD ["zsh"]
