@@ -38,7 +38,7 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 WORKDIR /home/dev/workspace
 
 # Copy update prompt and add to zshrc
-COPY entry-prompt.zsh /home/dev/entry-prompt.zsh
+COPY --chown=dev:dev entry-prompt.zsh /home/dev/entry-prompt.zsh
 RUN chmod +x /home/dev/entry-prompt.zsh && echo 'source /home/dev/entry-prompt.zsh' >> /home/dev/.zshrc
 
 # Default command
