@@ -23,10 +23,9 @@ RUN useradd -m -s /bin/zsh dev && \
     echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Pre-install LazyPi packages
-# We use 'yes' to automate the "Install all" selection in the interactive picker
-# This must be run as root to allow global npm installation
-# We append '|| true' because some optional packages may fail to install, but we still want the image to build
-RUN yes | npx @robzolkos/lazypi || true
+# We install globally first to leverage Docker layer caching and avoid npx download overhead
+RUN npm install -g @robzolkos/lazypi
+RUN yes | lazypi || true
 
 USER dev
 WORKDIR /home/dev
