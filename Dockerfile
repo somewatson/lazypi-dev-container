@@ -32,7 +32,6 @@ RUN npm install -g @robzolkos/lazypi && \
     npm install -g pi-mcp-adapter & \
     npm install -g pi-web-access & \
     npm install -g pi-memory-md & \
-    npm install -g pi-plan & \
     npm install -g pi-simplify & \
     npm install -g pi-add-dir & \
     npm install -g pi-prompt-template-model & \
@@ -41,8 +40,6 @@ RUN npm install -g @robzolkos/lazypi && \
 
 RUN npm install -g @plannotator/pi-extension & \
     npm install -g pi-slopchop & \
-    npm install -g pi-powerbar & \
-    npm install -g pi-extension-settings & \
     npm install -g pi-usage-extension & \
     npm install -g @tmustier/pi-raw-paste & \
     npm install -g pi-manage-todo-list & \
