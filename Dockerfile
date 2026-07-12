@@ -23,9 +23,31 @@ RUN useradd -m -s /bin/zsh dev && \
     echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Pre-install LazyPi packages
-# We install globally first to leverage Docker layer caching and avoid npx download overhead
-RUN npm install -g @robzolkos/lazypi
-RUN yes | lazypi || true
+# Installing core tools and extensions explicitly to maximize Docker layer caching
+RUN npm install -g @robzolkos/lazypi \
+    pi-subagents \
+    pi-mcp-adapter \
+    pi-web-access \
+    pi-memory-md \
+    pi-plan \
+    pi-simplify \
+    pi-add-dir \
+    pi-prompt-template-model \
+    pi-claude-cli
+
+RUN npm install -g \
+    @plannotator/pi-extension \
+    pi-slopchop \
+    pi-powerbar \
+    pi-extension-settings \
+    pi-usage-extension \
+    @tmustier/pi-raw-paste \
+    pi-manage-todo-list \
+    pi-btw
+
+RUN npm install -g \
+    pi-autoresearch \
+    pi-ralph-wiggum
 
 USER dev
 WORKDIR /home/dev
