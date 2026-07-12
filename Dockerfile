@@ -25,27 +25,32 @@ RUN useradd -m -s /bin/zsh dev && \
     echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Pre-install LazyPi packages
-# Installing core tools and extensions explicitly to maximize Docker layer caching
-RUN npm install -g @robzolkos/lazypi
-RUN npm install -g pi-subagents
-RUN npm install -g pi-mcp-adapter
-RUN npm install -g pi-web-access
-RUN npm install -g pi-memory-md
-RUN npm install -g pi-plan
-RUN npm install -g pi-simplify
-RUN npm install -g pi-add-dir
-RUN npm install -g pi-prompt-template-model
-RUN npm install -g pi-claude-cli
-RUN npm install -g @plannotator/pi-extension
-RUN npm install -g pi-slopchop
-RUN npm install -g pi-powerbar
-RUN npm install -g pi-extension-settings
-RUN npm install -g pi-usage-extension
-RUN npm install -g @tmustier/pi-raw-paste
-RUN npm install -g pi-manage-todo-list
-RUN npm install -g pi-btw
-RUN npm install -g pi-autoresearch
-RUN npm install -g pi-ralph-wiggum
+# We use background processes and 'wait' to parallelize downloads while keeping logical groups for caching
+RUN npm install -g @robzolkos/lazypi && \
+    npm install -g pi-subagents & \
+    npm install -g pi-mcp-adapter & \
+    npm install -g pi-web-access & \
+    npm install -g pi-memory-md & \
+    npm install -g pi-plan & \
+    npm install -g pi-simplify & \
+    npm install -g pi-add-dir & \
+    npm install -g pi-prompt-template-model & \
+    npm install -g pi-claude-cli & \
+    wait
+
+RUN npm install -g @plannotator/pi-extension & \
+    npm install -g pi-slopchop & \
+    npm install -g pi-powerbar & \
+    npm install -g pi-extension-settings & \
+    npm install -g pi-usage-extension & \
+    npm install -g @tmustier/pi-raw-paste & \
+    npm install -g pi-manage-todo-list & \
+    npm install -g pi-btw & \
+    wait
+
+RUN npm install -g pi-autoresearch & \
+    npm install -g pi-ralph-wiggum & \
+    wait
 
 # Run lazypi to catch any new default packages or configurations
 RUN yes | lazypi || true
