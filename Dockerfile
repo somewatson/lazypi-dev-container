@@ -22,7 +22,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 RUN useradd -m -s /bin/zsh dev && \
     echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     touch /home/dev/.zshrc && \
-    chown dev:dev /home/dev/.zshrc
+    chmod 666 /home/dev/.zshrc
 
 # Pre-install LazyPi packages
 # We use 'yes' to automate the "Install all" selection in the interactive picker
@@ -41,7 +41,7 @@ WORKDIR /home/dev/workspace
 
 # Copy update prompt and add to zshrc
 COPY --chown=dev:dev entry-prompt.zsh /home/dev/entry-prompt.zsh
-RUN chmod +x /home/dev/entry-prompt.zsh && echo 'source /home/dev/entry-prompt.zsh' >> /home/dev/.zshrc
+RUN chmod +x /home/dev/entry-prompt.zsh && echo 'source /home/dev/entry-prompt.zsh' >> /home/dev/.zshrc && chmod 666 /home/dev/.zshrc
 
 # Default command
 CMD ["zsh"]
