@@ -1,2 +1,4 @@
 #!/bin/bash
+# Ensure workspace directory exists to avoid root ownership
+mkdir -p ./workspace
 docker compose exec dev-container zsh
