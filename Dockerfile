@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     sudo \
     docker.io \
+    build-essential \
+    python3 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js 20 (LTS) - ARM64 compatible
