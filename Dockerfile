@@ -30,7 +30,7 @@ RUN useradd -m -s /bin/zsh dev && \
 RUN npm install -g @robzolkos/lazypi
 RUN echo "pi-subagents pi-mcp-adapter pi-web-access pi-memory-md" | xargs -n 1 -P 4 npm install -g
 RUN echo "pi-simplify pi-add-dir pi-prompt-template-model pi-claude-cli" | xargs -n 1 -P 4 npm install -g
-RUN echo "@plannotator/pi-extension pi-slopchop pi-usage-extension @tmustier/pi-raw-paste" | xargs -n 1 -P 4 npm install -g
+RUN echo "@plannotator/pi-extension pi-slopchop @tmustier/pi-usage-extension @tmustier/pi-raw-paste" | xargs -n 1 -P 4 npm install -g
 RUN echo "pi-manage-todo-list pi-btw pi-autoresearch pi-ralph-wiggum" | xargs -n 1 -P 4 npm install -g
 RUN echo "pi-ask-user pi-interactive-shell @devkade/pi-plan @juanibiapina/pi-powerbar" | xargs -n 1 -P 4 npm install -g
 RUN echo "@juanibiapina/pi-extension-settings @tmustier/pi-usage-extension @every-env/compound-plugin pi-hackerman" | xargs -n 1 -P 4 npm install -g
