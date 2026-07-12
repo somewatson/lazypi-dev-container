@@ -61,5 +61,11 @@ COPY --chown=dev:dev entry-prompt.zsh /home/dev/entry-prompt.zsh
 COPY --chown=dev:dev setup-permissions.sh /home/dev/setup-permissions.sh
 RUN chmod +x /home/dev/entry-prompt.zsh /home/dev/setup-permissions.sh && echo 'source /home/dev/entry-prompt.zsh' >> /home/dev/.zshrc
 
+# Create entrypoint script to run permissions setup before starting shell
+RUN echo '#!/bin/bash\n/home/dev/setup-permissions.sh\nexec "$@"' > /usr/local/bin/entrypoint.sh && \
+    chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
 # Default command
 CMD ["zsh"]
