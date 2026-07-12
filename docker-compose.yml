@@ -9,7 +9,6 @@ services:
       - ./workspace:/home/dev/workspace
       # Persist LazyPi configuration in local folder
       - ./lazypi_config:/home/dev/.pi
-      - ./workspace/.zsh_history:/home/dev/.zsh_history
       # Docker socket for Docker-out-of-Docker (DooD)
       - /var/run/docker.sock:/var/run/docker.sock
     # Run as the 'dev' user defined in the Dockerfile to avoid permission issues
