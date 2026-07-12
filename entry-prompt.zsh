@@ -2,9 +2,13 @@
 # This fixes "Permission denied" on the host for ./lazypi_config
 bash /home/dev/setup-permissions.sh
 
+# Welcome banner
+echo "\n\033[1;34m===================================================="
+echo "  Welcome to the LazyPi Development Container!  "
+echo "====================================================\033[0m"
+
 # Prompt the user to update LazyPi on shell start
-echo "\n--- LazyPi Dev Container ---"
-echo "Would you like to check for LazyPi package updates? (y/N)"
+echo -n "Would you like to check for LazyPi package updates? (y/N): "
 read -k 1 response
 echo ""
 if [[ "$response" == "y" || "$response" == "Y" ]]; then
@@ -14,4 +18,4 @@ if [[ "$response" == "y" || "$response" == "Y" ]]; then
 else
     echo "Skipping updates."
 fi
-echo "---------------------------\n"
+echo -e "\033[1;34m----------------------------------------------------\033[0m\n"
