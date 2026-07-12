@@ -13,6 +13,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     # Run as the 'dev' user defined in the Dockerfile to avoid permission issues
     user: dev
+    environment:
+      - CONTAINER_PROMPT=${CONTAINER_PROMPT:-[lazypi-docker]}
     working_dir: /home/dev/workspace
     stdin_open: true
     tty: true
