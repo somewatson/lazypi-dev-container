@@ -42,6 +42,9 @@ RUN mkdir -p /root/.pi/agent && echo '{"packages": ["npm:pi-subagents", "npm:pi-
 # Run lazypi to catch any new default packages or configurations (now a no-op for the above)
 RUN yes | lazypi || true
 
+# Setup docker group for the dev user
+RUN groupadd -f docker && usermod -aG docker dev
+
 USER dev
 WORKDIR /home/dev
 
