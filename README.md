@@ -35,24 +35,35 @@ An Ubuntu-based ARM64 compatible environment with ZSH, Oh My Zsh, Node.js, and L
 
 You can add custom providers and models via `/home/dev/.pi/agent/models.json` (mapped to the `./lazypi_config` folder on your host). 
 
-### Minimal Example (Local Models)
-If you are running Ollama or another local provider on your host machine, use `host.docker.internal` instead of `localhost`:
+### 🛠️ Host Setup for Local Models
 
-```json
-{
-  "providers": {
-    "ollama": {
-      "baseUrl": "http://host.docker.internal:11434/v1",
-      "api": "openai-completions",
-      "apiKey": "ollama",
-      "models": [
-        { "id": "llama3.1:8b" },
-        { "id": "qwen2.5-coder:7b" }
-      ]
-    }
-  }
-}
-```
+Since we use a bind mount for persistence, you should create the configuration directory and file on your **host machine** before starting the container. This ensures the settings are preserved and easy to edit.
+
+1. **Create the config directory**:
+   ```bash
+   mkdir -p ./lazypi_config/agent
+   ```
+
+2. **Create the `models.json` file**:
+   Create `./lazypi_config/agent/models.json` with your provider details. For example, if using Ollama on the host:
+   ```json
+   {
+     "providers": {
+       "ollama": {
+         "baseUrl": "http://host.docker.internal:11434/v1",
+         "api": "openai-completions",
+         "apiKey": "ollama",
+         "models": [
+           { "id": "llama3.1:8b" },
+           { "id": "qwen2.5-coder:7b" }
+         ]
+       }
+     }
+   }
+   ```
+
+3. **Start the container**:
+   Now run `docker compose up -d`. The container will automatically map `./lazypi_config` to `/home/dev/.pi`, making your `models.json` available immediately.
 
 For more details, visit the [official documentation](https://pi.dev/docs/latest/models#minimal-example).
 
