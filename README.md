@@ -39,8 +39,8 @@ You can add custom providers and models via `/home/dev/.pi/agent/models.json` (m
 
 Since we use a bind mount for persistence, you should create the configuration directory and file on your **host machine** before starting the container. This ensures the settings are preserved and easy to edit.
 
-1. **Create the config directory**:
-   The container now handles permissions automatically on startup, but you can initialize it manually:
+1. **Initialize Configuration (Optional)**:
+   The container automatically handles directory creation and permissions via a setup script on startup. If you prefer to create the folder manually on your host first:
    ```bash
    mkdir -p ./lazypi_config/agent
    ```
