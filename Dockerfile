@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     docker.io \
     build-essential \
     python3 \
+    nano \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js 22 (Current) - ARM64 compatible
