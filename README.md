@@ -12,13 +12,15 @@ An Ubuntu-based ARM64 compatible environment with ZSH, Oh My Zsh, Node.js, and L
 
 2. **Build and Start**:
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
 3. **Enter the Container**:
+   Use the provided helper script:
    ```bash
-   docker-compose exec dev-container zsh
+   ./dev-shell
    ```
+
 
 ## Features
 - **Ubuntu Base**: Familiar and easy to use.
@@ -31,7 +33,7 @@ An Ubuntu-based ARM64 compatible environment with ZSH, Oh My Zsh, Node.js, and L
 
 ## Updating Models
 
-You can add custom providers and models via `/home/dev/.pi/agent/models.json` (mapped to the `./lazypi_config` folder on your host).
+You can add custom providers and models via `/home/dev/.pi/agent/models.json` (mapped to the `./lazypi_config` folder on your host). 
 
 ### Minimal Example (Local Models)
 If you are running Ollama or another local provider on your host machine, use `host.docker.internal` instead of `localhost`:
@@ -53,6 +55,19 @@ If you are running Ollama or another local provider on your host machine, use `h
 ```
 
 For more details, visit the [official documentation](https://pi.dev/docs/latest/models#minimal-example).
+
+## Updating LazyPi Packages
+
+The container pre-installs the latest LazyPi package set during the build process. To update these packages to the latest versions:
+
+1. **Rebuild the container** (Recommended):
+   ```bash
+   docker-compose up -d --build
+   ```
+2. **Update while running**: If you are already inside the container, you can run the installer again:
+   ```bash
+   npx @robzolkos/lazypi
+   ```
 
 ## Credits
 This project was created by [Some Watson](https://somewatson.com/) with the assistance of opencode, an AI software engineering agent.
