@@ -52,8 +52,20 @@ RUN npm install -g pi-autoresearch & \
     npm install -g pi-ralph-wiggum & \
     wait
 
+RUN npm install -g pi-ask-user & \
+    npm install -g pi-interactive-shell & \
+    npm install -g @devkade/pi-plan & \
+    npm install -g @juanibiapina/pi-powerbar & \
+    npm install -g @juanibiapina/pi-extension-settings & \
+    npm install -g @tmustier/pi-usage-extension & \
+    npm install -g @every-env/compound-plugin & \
+    npm install -g pi-hackerman & \
+    npm install -g @victor-software-house/pi-curated-themes & \
+    npm install -g pi-terminal-theme & \
+    wait
+
 # Pre-populate the LazyPi state file so the installer recognizes the global npm packages as already installed
-RUN mkdir -p /root/.pi/agent && echo '{"packages": ["npm:pi-subagents", "npm:pi-mcp-adapter", "npm:pi-web-access", "npm:pi-memory-md", "npm:pi-plan", "npm:pi-simplify", "npm:pi-add-dir", "npm:pi-prompt-template-model", "npm:pi-claude-cli", "npm:@plannotator/pi-extension", "npm:pi-slopchop", "npm:pi-powerbar", "npm:pi-extension-settings", "npm:pi-usage-extension", "npm:@tmustier/pi-raw-paste", "npm:pi-manage-todo-list", "npm:pi-btw", "npm:pi-autoresearch", "npm:pi-ralph-wiggum"]}' > /root/.pi/agent/settings.json
+RUN mkdir -p /root/.pi/agent && echo '{"packages": ["npm:pi-subagents", "npm:pi-ask-user", "npm:pi-mcp-adapter", "npm:pi-web-access", "git:github.com/VandeeFeng/pi-memory-md", "npm:@devkade/pi-plan", "npm:pi-simplify", "npm:pi-add-dir", "npm:pi-prompt-template-model", "npm:pi-claude-cli", "npm:@plannotator/pi-extension", "npm:pi-slopchop", "npm:@juanibiapina/pi-extension-settings", "npm:@juanibiapina/pi-powerbar", "npm:@tmustier/pi-usage-extension", "npm:@tmustier/pi-raw-paste", "git:github.com/tintinweb/pi-manage-todo-list@b75c449aa85ce328e9a8b632f62bf642aed40359", "npm:pi-btw", "npm:pi-interactive-shell", "git:github.com/davebcn87/pi-autoresearch", "npm:@tmustier/pi-ralph-wiggum", "npm:@every-env/compound-plugin", "git:github.com/javierportillo/pi-hackerman@63b0a3ef2c7b14985ffeb6cac44614ba59cd5693", "npm:@victor-software-house/pi-curated-themes", "npm:pi-terminal-theme"]}' > /root/.pi/agent/settings.json
 
 # Run lazypi to catch any new default packages or configurations (now a no-op for the above)
 RUN yes | lazypi || true
