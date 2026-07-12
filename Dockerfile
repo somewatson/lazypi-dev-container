@@ -33,7 +33,7 @@ RUN echo "pi-simplify pi-add-dir pi-prompt-template-model pi-claude-cli" | xargs
 RUN echo "@plannotator/pi-extension pi-slopchop @tmustier/pi-usage-extension @tmustier/pi-raw-paste" | xargs -n 1 -P 4 npm install -g
 RUN echo "pi-manage-todo-list pi-btw pi-autoresearch @tmustier/pi-ralph-wiggum" | xargs -n 1 -P 4 npm install -g
 RUN echo "pi-ask-user pi-interactive-shell @devkade/pi-plan @juanibiapina/pi-powerbar" | xargs -n 1 -P 4 npm install -g
-RUN echo "@juanibiapina/pi-extension-settings @every-env/compound-plugin pi-hackerman" | xargs -n 1 -P 4 npm install -g
+RUN echo "@juanibiapina/pi-extension-settings @every-env/compound-plugin" | xargs -n 1 -P 4 npm install -g
 RUN echo "@victor-software-house/pi-curated-themes pi-terminal-theme" | xargs -n 1 -P 4 npm install -g
 
 # Pre-populate the LazyPi state file so the installer recognizes the global npm packages as already installed
