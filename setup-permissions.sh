@@ -14,6 +14,15 @@ fi
 # This allows the 'dev' user to run docker commands without sudo
 if [ -S /var/run/docker.sock ]; then
     DOCKER_GID=$(stat -c '%g' /var/run/docker.sock)
-    sudo groupmod -g "$DOCKER_GID" docker
-    sudo usermod -aG docker dev
+    
+    # Check if a group with this GID already exists
+    if getent group "$DOCKER_GID" > /dev/null; then
+        # GID exists, find the group name and add dev to it
+        EXISTING_GROUP=$(getent group "$DOCKER_GID" | cut -d: -f1)
+        sudo usermod -aG "$EXISTING_GROUP" dev
+    else
+        # GID is free, create a new group and add dev to it
+        sudo groupadd -g "$DOCKER_GID" host-docker
+        sudo usermod -aG host-docker dev
+    fi
 fi
