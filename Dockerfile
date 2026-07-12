@@ -24,30 +24,29 @@ RUN useradd -m -s /bin/zsh dev && \
 
 # Pre-install LazyPi packages
 # Installing core tools and extensions explicitly to maximize Docker layer caching
-RUN npm install -g @robzolkos/lazypi \
-    pi-subagents \
-    pi-mcp-adapter \
-    pi-web-access \
-    pi-memory-md \
-    pi-plan \
-    pi-simplify \
-    pi-add-dir \
-    pi-prompt-template-model \
-    pi-claude-cli
+RUN npm install -g @robzolkos/lazypi
+RUN npm install -g pi-subagents
+RUN npm install -g pi-mcp-adapter
+RUN npm install -g pi-web-access
+RUN npm install -g pi-memory-md
+RUN npm install -g pi-plan
+RUN npm install -g pi-simplify
+RUN npm install -g pi-add-dir
+RUN npm install -g pi-prompt-template-model
+RUN npm install -g pi-claude-cli
+RUN npm install -g @plannotator/pi-extension
+RUN npm install -g pi-slopchop
+RUN npm install -g pi-powerbar
+RUN npm install -g pi-extension-settings
+RUN npm install -g pi-usage-extension
+RUN npm install -g @tmustier/pi-raw-paste
+RUN npm install -g pi-manage-todo-list
+RUN npm install -g pi-btw
+RUN npm install -g pi-autoresearch
+RUN npm install -g pi-ralph-wiggum
 
-RUN npm install -g \
-    @plannotator/pi-extension \
-    pi-slopchop \
-    pi-powerbar \
-    pi-extension-settings \
-    pi-usage-extension \
-    @tmustier/pi-raw-paste \
-    pi-manage-todo-list \
-    pi-btw
-
-RUN npm install -g \
-    pi-autoresearch \
-    pi-ralph-wiggum
+# Run lazypi to catch any new default packages or configurations
+RUN yes | lazypi || true
 
 USER dev
 WORKDIR /home/dev
