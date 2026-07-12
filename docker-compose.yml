@@ -13,8 +13,8 @@ services:
       - ./lazypi_config:/home/dev/.pi
       # Docker socket for Docker-out-of-Docker (DooD)
       - /var/run/docker.sock:/var/run/docker.sock
-    # Run as the current host user to avoid permission issues
-    user: "${UID:-1000}:${GID:-1000}"
+    # Run as the 'dev' user defined in the Dockerfile to avoid permission issues
+    user: dev
     working_dir: /home/dev/workspace
     stdin_open: true
     tty: true
