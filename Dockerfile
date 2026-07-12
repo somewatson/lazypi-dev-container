@@ -25,7 +25,8 @@ RUN useradd -m -s /bin/zsh dev && \
 # Pre-install LazyPi packages
 # We use 'yes' to automate the "Install all" selection in the interactive picker
 # This must be run as root to allow global npm installation
-RUN yes | npx @robzolkos/lazypi
+# We append '|| true' because some optional packages may fail to install, but we still want the image to build
+RUN yes | npx @robzolkos/lazypi || true
 
 USER dev
 WORKDIR /home/dev
