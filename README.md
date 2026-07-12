@@ -62,12 +62,35 @@ The container pre-installs the latest LazyPi package set during the build proces
 
 1. **Rebuild the container** (Recommended):
    ```bash
-   docker-compose up -d --build
+   docker compose up -d --build
    ```
 2. **Update while running**: If you are already inside the container, you can run the installer again:
    ```bash
    npx @robzolkos/lazypi
    ```
+
+## Persistence & Package Management
+
+To keep the environment fast and consistent, this container uses a hybrid approach to package management:
+
+### 1. System Tools (Baked-in)
+Core tools and the initial LazyPi package set are installed during the image build. These are stored in the container's read-only layers for maximum performance.
+- **To update**: Run `docker compose up -d --build`.
+- **To add permanently**: Add the package to the `Dockerfile` and rebuild.
+
+### 2. User Tools (Persistent)
+If you need additional tools that survive container recreations, avoid `npm install -g`. Instead, use one of these methods:
+
+- **Project Local (Recommended)**: Install packages directly in your workspace:
+  ```bash
+  npm install <package-name>
+  ```
+  Since the workspace is mounted to your host, these are saved in `node_modules` on your disk and persist forever. Run them using `npx <package-name>`.
+
+- **On-Demand**: For tools you use occasionally, skip installation entirely:
+  ```bash
+  npx <package-name>
+  ```
 
 ## Credits
 This project was created by [Some Watson](https://somewatson.com/) with the assistance of opencode, an AI software engineering agent.
