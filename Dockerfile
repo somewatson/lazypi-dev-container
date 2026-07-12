@@ -45,6 +45,10 @@ RUN yes | lazypi || true
 # Setup docker group for the dev user
 RUN groupadd -f docker && usermod -aG docker dev
 
+# Create entrypoint script to run permissions setup before starting shell
+RUN echo '#!/bin/bash\n/home/dev/setup-permissions.sh\nexec "$@"' > /usr/local/bin/entrypoint.sh && \
+    chmod +x /usr/local/bin/entrypoint.sh
+
 USER dev
 WORKDIR /home/dev
 
