@@ -5,4 +5,4 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Prepend [lazypi-docker] to the prompt to indicate container environment
-PROMPT='[lazypi-docker] '"$PROMPT'
+PROMPT="[lazypi-docker] ${PROMPT}"
