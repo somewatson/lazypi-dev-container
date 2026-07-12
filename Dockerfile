@@ -22,15 +22,16 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 RUN useradd -m -s /bin/zsh dev && \
     echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+# Pre-install LazyPi packages
+# We use 'yes' to automate the "Install all" selection in the interactive picker
+# This must be run as root to allow global npm installation
+RUN yes | npx @robzolkos/lazypi
+
 USER dev
 WORKDIR /home/dev
 
 # Install Oh My Zsh (unattended)
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-
-# Pre-install LazyPi packages
-# We use 'yes' to automate the "Install all" selection in the interactive picker
-RUN yes | npx @robzolkos/lazypi
 
 # Set workspace directory
 WORKDIR /home/dev/workspace
