@@ -32,7 +32,9 @@ USER dev
 WORKDIR /home/dev
 
 # Install Oh My Zsh (unattended)
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+COPY --chown=dev:dev minimal.zshrc /home/dev/minimal.zshrc
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+    cp /home/dev/minimal.zshrc /home/dev/.zshrc
 
 # Set workspace directory
 WORKDIR /home/dev/workspace
