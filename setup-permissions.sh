@@ -11,8 +11,8 @@ if [ -d "$CONFIG_DIR" ]; then
     sudo chown -R dev:dev "$CONFIG_DIR/agent"
 fi
 
-if [ -f "$WORKSPACE_DIR/.zsh_history" ]; then
-    sudo chown dev:dev "$WORKSPACE_DIR/.zsh_history"
+if [ -d "$WORKSPACE_DIR" ]; then
+    sudo chown -R dev:dev "$WORKSPACE_DIR"
 fi
 
 # Synchronize docker group ID with the host's docker socket
