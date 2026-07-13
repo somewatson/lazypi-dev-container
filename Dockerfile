@@ -27,7 +27,7 @@ RUN useradd -m -s /bin/zsh dev && \
 
 # Pre-install LazyPi packages
 # Use xargs for parallel installation in small batches to balance speed and stability
-RUN npm install -g @robzolkos/lazypi
+RUN npm install -g @robzolkos/lazypi @anthropic-ai/claude-code
 RUN echo "pi-subagents pi-mcp-adapter pi-web-access pi-memory-md" | xargs -n 1 -P 4 npm install -g
 RUN echo "pi-simplify pi-add-dir pi-prompt-template-model pi-claude-cli" | xargs -n 1 -P 4 npm install -g
 RUN echo "@plannotator/pi-extension pi-slopchop @tmustier/pi-usage-extension @tmustier/pi-raw-paste" | xargs -n 1 -P 4 npm install -g
@@ -43,7 +43,7 @@ RUN mkdir -p /root/.pi/agent && echo '{"packages": ["npm:pi-subagents", "npm:pi-
 RUN yes | lazypi || true
 
 # Pre-install and pre-populate for the dev user
-RUN npm install -g @robzolkos/lazypi
+RUN npm install -g @robzolkos/lazypi @anthropic-ai/claude-code
 RUN echo "pi-subagents pi-mcp-adapter pi-web-access pi-memory-md" | xargs -n 1 -P 4 npm install -g
 RUN echo "pi-simplify pi-add-dir pi-prompt-template-model pi-claude-cli" | xargs -n 1 -P 4 npm install -g
 RUN echo "@plannotator/pi-extension pi-slopchop @tmustier/pi-usage-extension @tmustier/pi-raw-paste" | xargs -n 1 -P 4 npm install -g
