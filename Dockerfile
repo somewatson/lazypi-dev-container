@@ -45,6 +45,9 @@ RUN yes | lazypi || true
 # Setup docker group for the dev user
 RUN groupadd -f docker && usermod -aG docker dev
 
+# Install docker-compose-plugin as root before switching user
+RUN apt-get update && apt-get install -y docker-compose-plugin && rm -rf /var/lib/apt/lists/*
+
 # Create entrypoint script to run permissions setup before starting shell
 RUN echo '#!/bin/bash\n/home/dev/setup-permissions.sh\nexec "$@"' > /usr/local/bin/entrypoint.sh && \
     chmod +x /usr/local/bin/entrypoint.sh
