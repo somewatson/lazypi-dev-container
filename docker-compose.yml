@@ -22,16 +22,3 @@ services:
     privileged: true
     ipc: host
 
-  caddy:
-    image: caddy:latest
-    container_name: lazypi-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - ./caddy_data:/data
-      - ./caddy_config:/config
-    depends_on:
-      - dev-container
-
