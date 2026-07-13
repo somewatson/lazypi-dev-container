@@ -3,11 +3,16 @@
 # This prevents "Permission denied" errors when accessing the volume from the host
 
 CONFIG_DIR="/home/dev/.pi"
+WORKSPACE_DIR="/home/dev/workspace"
 
 if [ -d "$CONFIG_DIR" ]; then
     sudo chown -R dev:dev "$CONFIG_DIR"
     sudo mkdir -p "$CONFIG_DIR/agent"
     sudo chown -R dev:dev "$CONFIG_DIR/agent"
+fi
+
+if [ -f "$WORKSPACE_DIR/.zsh_history" ]; then
+    sudo chown dev:dev "$WORKSPACE_DIR/.zsh_history"
 fi
 
 # Synchronize docker group ID with the host's docker socket
