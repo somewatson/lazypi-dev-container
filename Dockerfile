@@ -64,7 +64,7 @@ RUN install -m 0755 -d /etc/apt/keyrings && \
     apt-get update && apt-get install -o Dpkg::Options::="--force-overwrite" -y docker-compose-plugin && rm -rf /var/lib/apt/lists/*
 
 # Create entrypoint script to run permissions setup before starting shell
-RUN echo '#!/bin/bash\n/home/dev/setup-permissions.sh\nexec "$@"' > /usr/local/bin/entrypoint.sh && \
+RUN echo '#!/bin/bash\nprintf "127.0.0.1 %s\n" "$(hostname)" >> /etc/hosts\n/home/dev/setup-permissions.sh\nexec "$@"' > /usr/local/bin/entrypoint.sh && \
     chmod +x /usr/local/bin/entrypoint.sh
 
 USER dev
