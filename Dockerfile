@@ -44,7 +44,6 @@ RUN yes | lazypi || true
 
 # Setup docker group for the dev user
 RUN groupadd -f docker && usermod -aG docker dev
-RUN groupadd -f docker && usermod -aG docker dev
 
 # Install docker-compose-plugin as root before switching user
 RUN install -m 0755 -d /etc/apt/keyrings && \
