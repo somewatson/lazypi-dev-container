@@ -31,6 +31,16 @@ A Debian-based ARM64 compatible environment with ZSH, Oh My Zsh, Node.js, and La
 - **Persistent Config**: Model configurations are saved in the `./lazypi_config` folder on your host.
 - **Local Workspace**: The current directory is mounted to `/home/dev/workspace`.
 
+## Important Note on Docker-out-of-Docker (DooD)
+
+Since this container mounts `/var/run/docker.sock`, any `docker` commands you run inside the dev container are actually executed by the **host's Docker daemon**. This has two critical implications for containers you start from within the dev environment:
+
+### 1. Volume Mounts
+When you use `-v /path/on/host:/path/in/container`, the `/path/on/host` must be a path that exists on your **physical host machine**, not a path inside the dev container. The host daemon is the one performing the mount, so it cannot "see" the dev container's internal filesystem.
+
+### 2. Port Mappings
+When you use `-p 8080:80`, the port `8080` is opened on your **host machine's network interfaces**, not on the dev container. You can access these services via `localhost:8080` on your host.
+
 ## Updating Models
 
 You can add custom providers and models via `/home/dev/.pi/agent/models.json` (mapped to the `./lazypi_config` folder on your host). 
