@@ -28,6 +28,7 @@ A Debian-based ARM64 compatible environment with ZSH, Oh My Zsh, Node.js, and La
 - **ZSH + Oh My Zsh**: Pre-configured shell.
 - **LazyPi**: Pre-installed with all packages.
 - **Docker-out-of-Docker**: Access the host Docker daemon via `/var/run/docker.sock`.
+- **Host Networking**: Uses `network_mode: host` for seamless communication with host services and internal Docker containers.
 - **Persistent Config**: Model configurations are saved in the `./lazypi_config` folder on your host.
 - **Local Workspace**: The current directory is mounted to `/home/dev/workspace`.
 

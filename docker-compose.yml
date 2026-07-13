@@ -21,4 +21,5 @@ services:
     # Ensure we have enough permissions for the docker socket
     privileged: true
     ipc: host
+    network_mode: host
 
