@@ -42,6 +42,9 @@ RUN mkdir -p /root/.pi/agent && echo '{"packages": ["npm:pi-subagents", "npm:pi-
 # Run lazypi to catch any new default packages or configurations (now a no-op for the above)
 RUN yes | lazypi || true
 
+# Ensure global node_modules are readable by the dev user
+RUN chmod -R o+rx /usr/lib/node_modules
+
 # Copy prepopulated settings to dev user's home
 RUN mkdir -p /home/dev/.pi/agent && cp /root/.pi/agent/settings.json /home/dev/.pi/agent/settings.json && chown -R dev:dev /home/dev/.pi
 
