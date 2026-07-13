@@ -9,7 +9,7 @@ echo "====================================================\033[0m"
 
 # Prompt the user to update LazyPi on shell start
 echo -n "Would you like to check for LazyPi package updates? (Y/n): "
-read -k 1 response
+read response
 echo ""
 if [[ "$response" == "y" || "$response" == "Y" || "$response" == "" ]]; then
     echo "Updating LazyPi packages..."
